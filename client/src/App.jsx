@@ -4,7 +4,25 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [formName, setFormName] = useState("");
+  const [formActive, setFormActive] = useState(true);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5000/webhook", {
+        formName: formName,
+        formActive: formActive,
+      });
+
+      console.log(response.data); // Handle the successful response
+      alert("Form created successfully on 123FormBuilder");
+    } catch (error) {
+      console.error("Error creating form:", error);
+      alert("Error creating form on 123FormBuilder");
+    }
+  };
 
   return (
     <div className="group my-10 mx-auto flex w-full max-w-xl border border-blue-400 bg-white text-blue-400 shadow-lg dark:bg-zinc-900">
