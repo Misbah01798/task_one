@@ -25,6 +25,10 @@ const formSchema = new mongoose.Schema({
 
 const Form = mongoose.model('Form', formSchema);
 
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
+
 // Webhook endpoint to receive data from forms.app
 app.post('/webhook', async (req, res) => {
   const { formName, formActive } = req.body;
